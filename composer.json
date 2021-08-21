@@ -1,0 +1,25 @@
+{
+  "name": "unetway/php-helpers",
+  "description": "Пакет с полезными хелперами PHP",
+  "keywords": [
+    "php",
+    "helpers"
+  ],
+  "homepage": "https://github.com/unetway/php-helpers",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cherepanov Ilya",
+      "email": "support@unetway.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+  },
+  "autoload": {
+    "psr-4": {
+      "Unetway\\PhpHelpers\\": "src/"
+    }
+  }
+}
+
