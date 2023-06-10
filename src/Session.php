@@ -8,11 +8,11 @@ class Session
 
     /**
      * @param $key
-     * @return mixed
+     * @return mixed|null
      */
     public static function get($key)
     {
-        return $_SESSION[$key];
+        return $_SESSION[$key] ?? null;
     }
 
     /**
@@ -40,29 +40,23 @@ class Session
     }
 
     /**
-     * @param $key
-     * @return mixed
+     * @param string $key
+     * @param bool $prefix
+     * @return int
      */
-    public static function increment($key, $prefix = false)
+    public static function increment(string $key, bool $prefix = false): int
     {
-        if ($prefix) {
-            return ++$_SESSION[$key];
-        }
-
-        return $_SESSION[$key]++;
+        return $prefix ? ++$_SESSION[$key] : $_SESSION[$key]++;
     }
 
     /**
-     * @param $key
-     * @return mixed
+     * @param string $key
+     * @param false $prefix
+     * @return int
      */
-    public static function decrement($key, $prefix = false)
+    public static function decrement(string $key, $prefix = false): int
     {
-        if ($prefix) {
-            return --$_SESSION[$key];
-        }
-
-        return $_SESSION[$key]--;
+        return $prefix ? --$_SESSION[$key] : $_SESSION[$key]--;
     }
 
 }

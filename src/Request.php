@@ -12,7 +12,7 @@ class Request
      */
     public static function get($key)
     {
-        return $_GET[$key];
+        return $_GET[$key] ?? null;
     }
 
     /**
