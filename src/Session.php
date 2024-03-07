@@ -7,7 +7,8 @@ class Session
 {
 
     /**
-     * @param $key
+     * Получает значение из сессии.
+     * @param string $key Ключ для получения значения.
      * @return mixed|null
      */
     public static function get($key)
@@ -16,8 +17,9 @@ class Session
     }
 
     /**
-     * @param $key
-     * @param $value
+     * Устанавливает значение в сессии.
+     * @param string $key Ключ для установки значения.
+     * @param mixed $value Значение для установки.
      * @return mixed
      */
     public static function put($key, $value)
@@ -26,7 +28,8 @@ class Session
     }
 
     /**
-     * @param $keys
+     * Удаляет ключи из сессии.
+     * @param array|string $keys Ключи для удаления.
      */
     public static function destroy($keys)
     {
@@ -40,8 +43,9 @@ class Session
     }
 
     /**
-     * @param string $key
-     * @param bool $prefix
+     * Увеличивает значение ключа в сессии.
+     * @param string $key Ключ для увеличения.
+     * @param bool $prefix Увеличивать ли значение с префиксом.
      * @return int
      */
     public static function increment(string $key, bool $prefix = false): int
@@ -50,8 +54,9 @@ class Session
     }
 
     /**
-     * @param string $key
-     * @param false $prefix
+     * Уменьшает значение ключа в сессии.
+     * @param string $key Ключ для уменьшения.
+     * @param bool $prefix Уменьшать ли значение с префиксом.
      * @return int
      */
     public static function decrement(string $key, $prefix = false): int

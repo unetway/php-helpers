@@ -2,20 +2,20 @@
 
 namespace Unetway\PhpHelpers;
 
-
 class Request
 {
-
     /**
-     * @param $key
+     * Получает значение из $_GET.
+     * @param string $key Ключ для получения значения.
      * @return mixed
      */
-    public static function get($key)
+    public static function get(string $key)
     {
-        return $_GET[$key] ?? null;
+        return filter_input(INPUT_GET, $key, FILTER_SANITIZE_STRING) ?? null;
     }
 
     /**
+     * Получает тело запроса.
      * @return mixed
      */
     public static function getBody()
@@ -25,41 +25,46 @@ class Request
     }
 
     /**
-     * @param array $params
+     * Кодирует массив в JSON.
+     * @param array $params Массив для кодирования.
      * @return false|string
      */
-    public static function json(array $params)
+    public static function json(array $params): string
     {
         return json_encode($params, JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * @param $url
+     * Перенаправляет пользователя на указанный URL.
+     * @param string $url URL для перенаправления.
      */
-    public static function location($url)
+    public static function location(string $url): void
     {
         header('Location: ' . $url);
     }
 
     /**
-     * @param int $limit_request
-     * @param int $time_request
+     * Ограничивает количество запросов за определенный период времени.
+     * @param int $limit_request Лимит запросов.
+     * @param int $time_request Время в секундах.
      * @return bool
      */
     public static function throttle(int $limit_request = 1, int $time_request = 10): bool
     {
-        if (empty(Session::get('time_request')) or Session::get('time_request') + $time_request < time()) {
+        $timeRequest = Session::get('time_request');
+        $limitRequest = Session::get('limit_request');
+
+        if (empty($timeRequest) || $timeRequest + $time_request < time()) {
             Session::put('time_request', time());
             Session::put('limit_request', 1);
-        } else if (Session::get('time_request') + $time_request >= time()) {
+        } elseif ($timeRequest + $time_request >= time()) {
             Session::increment('limit_request');
 
-            if (Session::get('limit_request') > $limit_request) {
+            if ($limitRequest > $limit_request) {
                 return true;
             }
         }
 
         return false;
     }
-
 }
